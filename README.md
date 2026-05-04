@@ -13,7 +13,7 @@ An AI-powered personal assistant equipped with real-time weather updates, a math
 
 ## 🌟 Live Demo
 Try out the Personal Assistant Agent here:
-**[👉 Click here to access the Live UI](#)** *(https://personal-assistant-agent-1-ui.onrender.com)*
+**[👉 Click here to access the Live UI](#)** *(https://personal-assistant-agent-ui.onrender.com/)*
 
 ---
 
@@ -39,9 +39,6 @@ Try out the Personal Assistant Agent here:
 - **Frontend**: Streamlit
 - **Tools**: OpenWeather API, Tavily Search API
 - **Deployment**: Docker, Render / AWS
-
-## 🏗️ Architecture
-![Architecture Diagram](link_to_architecture_diagram_if_any.png)
 
 ---
 
