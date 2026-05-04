@@ -4,9 +4,11 @@ Run: streamlit run src/ui/app.py
 """
 import streamlit as st
 import requests
+import os 
 
 # Backend API URL
-API_URL = "https://personal-assistant-agent-omhe.onrender.com/chat"
+BASE_URL = os.getenv("BACKEND_URL", "http://localhost:8000")
+API_URL = f"{BASE_URL}/chat"
 
 # Page config
 st.set_page_config(
