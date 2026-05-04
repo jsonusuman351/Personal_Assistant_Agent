@@ -6,7 +6,7 @@ import streamlit as st
 import requests
 
 # Backend API URL
-API_URL = https://personal-assistant-agent-omhe.onrender.com
+API_URL = "https://personal-assistant-agent-omhe.onrender.com/chat"
 
 # Page config
 st.set_page_config(
