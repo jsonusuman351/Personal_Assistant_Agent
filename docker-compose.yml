@@ -17,6 +17,8 @@ services:
       - "8501:8501"
     env_file:
       - .env
+    environment:
+      - BACKEND_URL=http://api:8000
     depends_on:
       - api
     command: streamlit run src/ui/app.py --server.address=0.0.0.0
