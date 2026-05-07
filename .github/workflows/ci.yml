@@ -1,0 +1,67 @@
+# ─────────────────────────────────────────────
+# CI Pipeline - Only runs tests
+# Render handles deployment automatically
+# ─────────────────────────────────────────────
+
+name: CI - Run Tests
+
+# TRIGGER: When does this run?
+on:
+  push:
+    branches: [ main ]        # On push to main
+  pull_request:
+    branches: [ main ]        # On PR creation
+
+jobs:
+  test:
+    name: Run All Tests
+    runs-on: ubuntu-latest    # GitHub's free Linux machine
+
+    steps:
+
+      # Step 1: Download code onto the runner
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python
+      - name: 🐍 Setup Python 3.10
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      # Step 3: Cache dependencies
+      # (Avoids reinstalling every time - faster builds)
+      - name: 📦 Cache pip packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+
+      # Step 4: Install dependencies
+      - name: ⚙️ Install Dependencies
+        run: pip install -r requirements.txt
+
+      # Step 5: Create a fake .env file
+      # (Not real keys - only for running tests)
+      - name: 🔐 Create Test Environment
+        run: |
+          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
+          echo "OPENWEATHER_API_KEY=${{ secrets.OPENWEATHER_API_KEY }}" >> .env
+          echo "TAVILY_API_KEY=${{ secrets.TAVILY_API_KEY }}" >> .env
+          echo "MAX_ITERATIONS=5" >> .env
+          echo "LOG_LEVEL=INFO" >> .env
+
+      # Step 6: Run tests (mock only - no real API keys needed)
+      - name: 🧪 Run Tests
+        run: |
+          pytest tests/test_tools.py -v --tb=short -m "not real_api"
+
+      # Step 7: Success notification
+      - name: ✅ Tests Passed!
+        if: success()
+        run: echo "All tests passed! Render will auto-deploy."
+
+      # Step 8: Failure notification
+      - name: ❌ Tests Failed!
+        if: failure()
+        run: echo "Tests FAILED! Fix before merging."
