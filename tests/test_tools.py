@@ -82,6 +82,29 @@ class TestCalculator:
     def test_decimal_result(self):
         assert "3.5" in calculator("7 / 2")
 
+    # Percentage tests
+    def test_percentage_of(self):
+        assert "100.0" in calculator("20% of 500")
+
+    def test_percentage_add(self):
+        assert "600.0" in calculator("500 + 20%")
+
+    def test_percentage_subtract(self):
+        assert "425.0" in calculator("500 - 15%")
+
+    def test_percentage_bare(self):
+        assert "0.2" in calculator("20%")
+
+    def test_percentage_case_insensitive(self):
+        assert "100.0" in calculator("20% OF 500")
+
+
+def test_percentage_calculation():
+    assert "100.0" in calculator("20% of 500")
+    assert "600.0" in calculator("500 + 20%")
+    assert "425.0" in calculator("500 - 15%")
+    assert "0.2"   in calculator("20%")
+
 
 # ═══════════════════════════════════════════════════════════════════════════
 # WEATHER — mocked (CI safe) + real (optional)
