@@ -85,6 +85,12 @@ LOG_LEVEL=INFO
 - Docker Compose runs both locally on ports `8000` (API) and `8501` (UI)
 - Swagger docs available at `http://localhost:8000/docs` when running locally
 
-## Knowledge Graph
+## Knowledge Graph — MANDATORY RULE
 
-`graphify-out/GRAPH_REPORT.md` contains a pre-built knowledge graph of this codebase (97 nodes, 110 edges). Read it first for quick orientation instead of exploring individual files — it maps community clusters, god nodes, and cross-file relationships.
+**BEFORE any task**, ALWAYS read:
+`graphify-out/GRAPH_REPORT.md`
+
+- This is your PRIMARY source for codebase understanding
+- Do NOT scan directories or read random files first
+- Only open specific files if graph report is insufficient
+  AND user explicitly asks
